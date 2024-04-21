@@ -154,25 +154,6 @@
 			press-threshold-microvolt = <18000>;
 		};
 	};
-
-	ir-receiver {
-		compatible = "gpio-ir-receiver";
-		gpios = <&gpio0 RK_PA6 GPIO_ACTIVE_LOW>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&ir_rx>;
-	};
-
-	fan: pwm-fan {
-		compatible = "pwm-fan";
-		/*
-		 * With 20KHz PWM and an EVERCOOL EC4007H12SA fan, these levels
-		 * work out to 0, ~1200, ~3000, and 5000RPM respectively.
-		 */
-		cooling-levels = <0 12 18 255>;
-		#cooling-cells = <2>;
-		fan-supply = <&vcc12v0_sys>;
-		pwms = <&pwm1 0 50000 0>;
-	};
 };
 
 
@@ -214,11 +195,11 @@
 	ddc-i2c-bus = <&i2c7>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&hdmi_cec>;
-	status = "okay";
+	status = "disabled";
 };
 
 &hdmi_sound {
-	status = "okay";
+	status = "disabled";
 };
 
 &i2c0 {
@@ -465,29 +446,23 @@
 };
 
 &i2c1 {
-	clock-frequency = <200000>;
-	i2c-scl-rising-time-ns = <150>;
-	i2c-scl-falling-time-ns = <30>;
-	status = "okay";
+	status = "disabled";
 };
 
 &i2c2 {
-	status = "okay";
+	status = "disabled";
 };
 
 &i2c4 {
-	clock-frequency = <400000>;
-	i2c-scl-rising-time-ns = <160>;
-	i2c-scl-falling-time-ns = <30>;
-	status = "okay";
+	status = "disabled";
 };
 
 &i2c7 {
-	status = "okay";
+	status = "disabled";
 };
 
 &i2s2 {
-	status = "okay";
+	status = "disabled";
 };
 
 &io_domains {
@@ -502,7 +477,7 @@
 	assigned-clock-parents = <&cru SCLK_PCIEPHY_REF100M>;
 	assigned-clock-rates = <100000000>;
 	assigned-clocks = <&cru SCLK_PCIEPHY_REF>;
-	status = "okay";
+	status = "disabled";
 };
 
 &pcie0 {
@@ -618,7 +593,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&sdio0_bus4 &sdio0_cmd &sdio0_clk>;
 	sd-uhs-sdr104;
-	status = "okay";
+	status = "disabled";
 };
 
 &sdmmc {
@@ -730,44 +705,6 @@
 
 &vopl_mmu {
 	status = "okay";
-};
-
-
-&cpu_thermal {
-	trips {
-		cpu_warm: cpu_warm {
-			temperature = <55000>;
-			hysteresis = <2000>;
-			type = "active";
-		};
-
-		cpu_hot: cpu_hot {
-			temperature = <65000>;
-			hysteresis = <2000>;
-			type = "active";
-		};
-	};
-
-	cooling-maps {
-		map2 {
-			trip = <&cpu_warm>;
-			cooling-device = <&fan THERMAL_NO_LIMIT 1>;
-		};
-
-		map3 {
-			trip = <&cpu_hot>;
-			cooling-device = <&fan 2 THERMAL_NO_LIMIT>;
-		};
-	};
-};
-
-&pinctrl {
-	ir {
-		ir_rx: ir-rx {
-			/* external pullup to VCC3V3_SYS, despite being 1.8V :/ */
-			rockchip,pins = <0 RK_PA6 1 &pcfg_pull_none>;
-		};
-	};
 };
 
 &u2phy0_host {
