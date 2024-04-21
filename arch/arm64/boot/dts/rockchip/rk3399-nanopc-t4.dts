@@ -183,7 +183,6 @@
 	snps,reset-active-low;
 	snps,reset-delays-us = <0 10000 1000000>;
 	pinctrl-names = "default";
-	pinctrl-0 = <&rmii-pins>;
 	tx_delay = <0x28>;
 	rx_delay = <0x13>;
 	status = "okay";
