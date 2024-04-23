@@ -19,7 +19,7 @@
 
 	clkin_gmac: external-gmac-clock {
 		compatible = "fixed-clock";
-		clock-frequency = <50000000>;
+		clock-frequency = <125000000>;
 		clock-output-names = "clkin_gmac";
 		#clock-cells = <0>;
 	};
@@ -695,7 +695,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&rgmii_pins>;
 	phy-mode = "rmii";
-	phy-supply = <&vcc_phy>;
+	phy-supply = <&vcc3v3_s3>;
 	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
 	snps,reset-active-low;
 	snps,reset-delays-us = <0 10000 50000>;
