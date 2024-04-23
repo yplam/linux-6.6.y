@@ -703,3 +703,11 @@
 	rx_delay = <0x13>;
 	status = "okay";
 };
+
+&tcphy0 {
+	status = "okay";
+};
+
+&tcphy1 {
+	status = "okay";
+};
