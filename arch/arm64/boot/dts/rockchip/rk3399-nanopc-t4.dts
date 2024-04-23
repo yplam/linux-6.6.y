@@ -693,7 +693,7 @@
 	assigned-clock-rates = <50000000>;
 	clock_in_out = "output";
 	pinctrl-names = "default";
-	pinctrl-0 = <&rmii_pins>;
+	pinctrl-0 = <&rgmii_pins>;
 	phy-mode = "rmii";
 	phy-supply = <&vcc_phy>;
 	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
